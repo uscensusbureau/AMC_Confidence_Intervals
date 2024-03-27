@@ -8478,8 +8478,7 @@ for a few example queries and geographies. Note the full list of queries in the 
 
 <span class="n">df_ci_spark</span> <span class="o">=</span> <span class="n">ci_wald_t_conditional_pyspark</span><span class="p">(</span><span class="n">df_data</span><span class="o">=</span><span class="n">df_statistics_spark</span><span class="p">,</span> <span class="n">ci_level</span><span class="o">=</span><span class="mf">.9</span><span class="p">,</span> <span class="n">degrees_freedom</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
 
-<span class="n">display</span><span class="p">(</span><span class="n">HTML</span><span class="p">(</span><span class="s2">"&lt;style&gt;pre { white-space: pre !important; }&lt;/style&gt;"</span><span class="p">))</span>
-<span class="n">df_ci_spark</span><span class="o">.</span><span class="n">orderBy</span><span class="p">(</span><span class="s2">"PRODUCT_TABLE"</span><span class="p">,</span><span class="s2">"QUERY"</span><span class="p">)</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+<span class="n">df_ci_spark</span><span class="o">.</span><span class="n">orderBy</span><span class="p">(</span><span class="s2">"PRODUCT_TABLE"</span><span class="p">,</span><span class="s2">"QUERY"</span><span class="p">)</span><span class="o">.</span><span class="n">toPandas</span><span class="p">()</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">15</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -8494,8 +8493,7 @@ for a few example queries and geographies. Note the full list of queries in the 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
 <pre>Setting default log level to "WARN".
 To adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLevel(newLevel).
-24/03/25 13:22:48 WARN Client: Neither spark.yarn.jars nor spark.yarn.archive is set, falling back to uploading libraries under SPARK_HOME.
-24/03/25 13:23:11 WARN YarnSchedulerBackend$YarnSchedulerEndpoint: Attempted to request executors before the AM has registered!
+24/03/27 09:21:09 WARN Client: Neither spark.yarn.jars nor spark.yarn.archive is set, falling back to uploading libraries under SPARK_HOME.
 </pre>
 </div>
 </div>
@@ -8508,46 +8506,274 @@ To adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLeve
 </div>
 <div class="jp-OutputArea-child">
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output" data-mime-type="text/html" tabindex="0">
-<style>pre { white-space: pre !important; }</style>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>[Stage 1:&gt;                                                          (0 + 1) / 2]</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>+-------------+-----------------------------------------+---------------------------------+-----------+---------+-------+------------------+------------------+-------------------+------------+---------+----------------+
-|PRODUCT_TABLE|QUERY                                    |GEO                              |PPMF0_COUNT|MEAN     |MSE    |STD               |RMSE              |BIAS               |MET_CRITERIA|POINT_EST|CI              |
-+-------------+-----------------------------------------+---------------------------------+-----------+---------+-------+------------------+------------------+-------------------+------------+---------+----------------+
-|DHCH H4      |H0040001: Total                          |ST-COU-TRT: 24-033-807200        |1379       |1379.68  |14.92  |3.8807215823864536|3.862641583165593 |0.6800000000000637 |false       |1379.0   |[1371, 1387]    |
-|DHCH H4      |H0040002: Owned mortgage                 |ST-COU-TRT: 24-033-807200        |106        |106.28   |5.4    |2.3544284515213714|2.32379000772445  |0.28000000000000114|false       |106.0    |[101, 111]      |
-|DHCH H4      |H0040003: Owned no mortgage              |ST-COU-TRT-BLGRP: 24-033-807200-1|17         |14.2     |20.08  |3.5707142142714248|4.481071300481616 |-2.8000000000000007|true        |19.8     |[10, 29]        |
-|DHCH H4      |H0040004: Rented                         |ST-COU-TRT-BLGRP: 24-033-807200-1|383        |384.88   |20.84  |4.245782220824182 |4.565084884205331 |1.8799999999999955 |false       |383.0    |[373, 393]      |
-|DHCP PCT8    |PCT0080001: Total NonVoting              |STATE: 32                        |665025     |665023.52|377.64 |19.776079827225068|19.432961688841978|-1.4799999999813735|false       |665025.0 |[664985, 665065]|
-|DHCP PCT8    |PCT0080002: NonVoting Household          |STATE: 32                        |663773     |663761.92|615.72 |22.660391288174345|24.813705890092276|-11.07999999995809 |false       |663773.0 |[663722, 663824]|
-|DHCP PCT8    |PCT0080003: Nonvoting Householder, spouse|STATE: 32                        |744        |795.76   |3226.56|23.880396423286893|56.80281683156215 |51.75999999999999  |true        |692.24   |[577, 807]      |
-|DHCP PCT8    |PCT0080021: Nonvoting Institutional      |STATE-COUNTY: 32-021             |13         |11.72    |32.08  |5.631163290120435 |5.663920903402518 |-1.2799999999999994|false       |13.0     |[1, 25]         |
-|DHCP PCT8    |PCT0080029: Nonvoting Non-Institutional  |STATE-COUNTY: 32-021             |0          |0.0      |0.0    |0.0               |0.0               |0.0                |false       |0.0      |[0, 0]          |
-|PL94 H1      |H0010001: Total                          |ST-AIAN: 06-4255                 |1313       |1313.0   |0.0    |0.0               |0.0               |0.0                |false       |1313.0   |[1313, 1313]    |
-|PL94 H1      |H0010002: Occupied                       |ST-AIAN: 06-4255                 |1220       |1219.2   |29.2   |5.454356057317859 |5.403702434442518 |-0.7999999999999545|false       |1220.0   |[1209, 1231]    |
-|PL94 H1      |H0010003: Vacant                         |ST-AIAN: 06-4255                 |93         |93.8     |29.2   |5.454356057317857 |5.403702434442518 |0.7999999999999972 |false       |93.0     |[82, 104]       |
-|PL94 P1      |P0010003: White alone                    |ST-ELEM SD: 17-42570             |3536       |3536.0   |120.88 |11.221259584675268|10.994544101507802|0.0                |false       |3536.0   |[3513, 3559]    |
-|PL94 P1      |P0010004: Black alone                    |ST-ELEM SD: 17-42570             |187        |189.36   |40.04  |5.992217174524524 |6.32771680782255  |2.3600000000000136 |false       |187.0    |[174, 200]      |
-|PL94 P1      |P0010005: AIAN alone                     |ST-ELEM SD: 17-42570             |8          |7.44     |9.68   |3.1235663378047   |3.111269837220809 |-0.5599999999999996|false       |8.0      |[1, 15]         |
-+-------------+-----------------------------------------+---------------------------------+-----------+---------+-------+------------------+------------------+-------------------+------------+---------+----------------+
-
-</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
 <pre>                                                                                </pre>
+</div>
+</div>
+<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[7]:</div>
+<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html" tabindex="0">
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+<thead>
+<tr style="text-align: right;">
+<th></th>
+<th>PRODUCT_TABLE</th>
+<th>QUERY</th>
+<th>GEO</th>
+<th>PPMF0_COUNT</th>
+<th>MEAN</th>
+<th>MSE</th>
+<th>STD</th>
+<th>RMSE</th>
+<th>BIAS</th>
+<th>MET_CRITERIA</th>
+<th>POINT_EST</th>
+<th>CI</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th>0</th>
+<td>DHCH H4</td>
+<td>H0040001: Total</td>
+<td>ST-COU-TRT: 24-033-807200</td>
+<td>1379</td>
+<td>1379.68</td>
+<td>14.92</td>
+<td>3.880722</td>
+<td>3.862642</td>
+<td>0.68</td>
+<td>False</td>
+<td>1379.00</td>
+<td>[1371, 1387]</td>
+</tr>
+<tr>
+<th>1</th>
+<td>DHCH H4</td>
+<td>H0040002: Owned mortgage</td>
+<td>ST-COU-TRT: 24-033-807200</td>
+<td>106</td>
+<td>106.28</td>
+<td>5.40</td>
+<td>2.354428</td>
+<td>2.323790</td>
+<td>0.28</td>
+<td>False</td>
+<td>106.00</td>
+<td>[101, 111]</td>
+</tr>
+<tr>
+<th>2</th>
+<td>DHCH H4</td>
+<td>H0040003: Owned no mortgage</td>
+<td>ST-COU-TRT-BLGRP: 24-033-807200-1</td>
+<td>17</td>
+<td>14.20</td>
+<td>20.08</td>
+<td>3.570714</td>
+<td>4.481071</td>
+<td>-2.80</td>
+<td>True</td>
+<td>19.80</td>
+<td>[10, 29]</td>
+</tr>
+<tr>
+<th>3</th>
+<td>DHCH H4</td>
+<td>H0040004: Rented</td>
+<td>ST-COU-TRT-BLGRP: 24-033-807200-1</td>
+<td>383</td>
+<td>384.88</td>
+<td>20.84</td>
+<td>4.245782</td>
+<td>4.565085</td>
+<td>1.88</td>
+<td>False</td>
+<td>383.00</td>
+<td>[373, 393]</td>
+</tr>
+<tr>
+<th>4</th>
+<td>DHCP PCT8</td>
+<td>PCT0080001: Total NonVoting</td>
+<td>STATE: 32</td>
+<td>665025</td>
+<td>665023.52</td>
+<td>377.64</td>
+<td>19.776080</td>
+<td>19.432962</td>
+<td>-1.48</td>
+<td>False</td>
+<td>665025.00</td>
+<td>[664985, 665065]</td>
+</tr>
+<tr>
+<th>5</th>
+<td>DHCP PCT8</td>
+<td>PCT0080002: NonVoting Household</td>
+<td>STATE: 32</td>
+<td>663773</td>
+<td>663761.92</td>
+<td>615.72</td>
+<td>22.660391</td>
+<td>24.813706</td>
+<td>-11.08</td>
+<td>False</td>
+<td>663773.00</td>
+<td>[663722, 663824]</td>
+</tr>
+<tr>
+<th>6</th>
+<td>DHCP PCT8</td>
+<td>PCT0080003: Nonvoting Householder, spouse</td>
+<td>STATE: 32</td>
+<td>744</td>
+<td>795.76</td>
+<td>3226.56</td>
+<td>23.880396</td>
+<td>56.802817</td>
+<td>51.76</td>
+<td>True</td>
+<td>692.24</td>
+<td>[577, 807]</td>
+</tr>
+<tr>
+<th>7</th>
+<td>DHCP PCT8</td>
+<td>PCT0080021: Nonvoting Institutional</td>
+<td>STATE-COUNTY: 32-021</td>
+<td>13</td>
+<td>11.72</td>
+<td>32.08</td>
+<td>5.631163</td>
+<td>5.663921</td>
+<td>-1.28</td>
+<td>False</td>
+<td>13.00</td>
+<td>[1, 25]</td>
+</tr>
+<tr>
+<th>8</th>
+<td>DHCP PCT8</td>
+<td>PCT0080029: Nonvoting Non-Institutional</td>
+<td>STATE-COUNTY: 32-021</td>
+<td>0</td>
+<td>0.00</td>
+<td>0.00</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.00</td>
+<td>False</td>
+<td>0.00</td>
+<td>[0, 0]</td>
+</tr>
+<tr>
+<th>9</th>
+<td>PL94 H1</td>
+<td>H0010001: Total</td>
+<td>ST-AIAN: 06-4255</td>
+<td>1313</td>
+<td>1313.00</td>
+<td>0.00</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.00</td>
+<td>False</td>
+<td>1313.00</td>
+<td>[1313, 1313]</td>
+</tr>
+<tr>
+<th>10</th>
+<td>PL94 H1</td>
+<td>H0010002: Occupied</td>
+<td>ST-AIAN: 06-4255</td>
+<td>1220</td>
+<td>1219.20</td>
+<td>29.20</td>
+<td>5.454356</td>
+<td>5.403702</td>
+<td>-0.80</td>
+<td>False</td>
+<td>1220.00</td>
+<td>[1209, 1231]</td>
+</tr>
+<tr>
+<th>11</th>
+<td>PL94 H1</td>
+<td>H0010003: Vacant</td>
+<td>ST-AIAN: 06-4255</td>
+<td>93</td>
+<td>93.80</td>
+<td>29.20</td>
+<td>5.454356</td>
+<td>5.403702</td>
+<td>0.80</td>
+<td>False</td>
+<td>93.00</td>
+<td>[82, 104]</td>
+</tr>
+<tr>
+<th>12</th>
+<td>PL94 P1</td>
+<td>P0010003: White alone</td>
+<td>ST-ELEM SD: 17-42570</td>
+<td>3536</td>
+<td>3536.00</td>
+<td>120.88</td>
+<td>11.221260</td>
+<td>10.994544</td>
+<td>0.00</td>
+<td>False</td>
+<td>3536.00</td>
+<td>[3513, 3559]</td>
+</tr>
+<tr>
+<th>13</th>
+<td>PL94 P1</td>
+<td>P0010004: Black alone</td>
+<td>ST-ELEM SD: 17-42570</td>
+<td>187</td>
+<td>189.36</td>
+<td>40.04</td>
+<td>5.992217</td>
+<td>6.327717</td>
+<td>2.36</td>
+<td>False</td>
+<td>187.00</td>
+<td>[174, 200]</td>
+</tr>
+<tr>
+<th>14</th>
+<td>PL94 P1</td>
+<td>P0010005: AIAN alone</td>
+<td>ST-ELEM SD: 17-42570</td>
+<td>8</td>
+<td>7.44</td>
+<td>9.68</td>
+<td>3.123566</td>
+<td>3.111270</td>
+<td>-0.56</td>
+<td>False</td>
+<td>8.00</td>
+<td>[1, 15]</td>
+</tr>
+</tbody>
+</table>
+</div>
 </div>
 </div>
 </div>
