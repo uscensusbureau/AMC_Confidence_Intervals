@@ -3,7 +3,7 @@
 <html lang="en">
 <head><meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>2a_Approx_Monte_Carlo_confidence_interval_notebook</title><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
+<title>3a_Approx_Monte_Carlo_confidence_interval_notebook</title><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 <style type="text/css">
     pre { line-height: 125%; }
 td.linenos .normal { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
@@ -7574,7 +7574,7 @@ for a few example queries and geographies. Though we used 2010 data, our queries
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Our data has one row for each query, geography, and iteration (0-25)</span>
 
-<span class="n">file_path</span> <span class="o">=</span> <span class="s2">"3_jupyter_data.csv"</span>
+<span class="n">file_path</span> <span class="o">=</span> <span class="s2">"4_jupyter_data.csv"</span>
 <span class="n">df_example</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">file_path</span><span class="p">)</span>
 <span class="n">df_example</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
 </pre></div>
@@ -8478,7 +8478,9 @@ for a few example queries and geographies. Though we used 2010 data, our queries
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
 <pre>Setting default log level to "WARN".
 To adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLevel(newLevel).
-24/04/08 10:21:12 WARN Client: Neither spark.yarn.jars nor spark.yarn.archive is set, falling back to uploading libraries under SPARK_HOME.
+24/04/08 13:30:06 WARN Utils: Service 'SparkUI (HTTPS)' could not bind on port 4440. Attempting port 4441.
+24/04/08 13:30:06 WARN Utils: Service 'SparkUI' could not bind on port 4040. Attempting port 4041.
+24/04/08 13:30:18 WARN Client: Neither spark.yarn.jars nor spark.yarn.archive is set, falling back to uploading libraries under SPARK_HOME.
 </pre>
 </div>
 </div>
