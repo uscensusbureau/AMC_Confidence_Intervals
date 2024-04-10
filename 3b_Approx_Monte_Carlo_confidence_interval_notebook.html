@@ -7482,18 +7482,18 @@ a.anchor-link {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h1 id="Confidence-Intervals-Using-Approximate-Monte-Carlo-Simulation-Iterations">Confidence Intervals Using Approximate Monte Carlo Simulation Iterations<a class="anchor-link" href="#Confidence-Intervals-Using-Approximate-Monte-Carlo-Simulation-Iterations">¶</a></h1><h2 id="Conditionally-Bias-adjusted-RMSE-based-Wald-Confidence-Intervals-with-Student%E2%80%99s-T-distribution">Conditionally Bias-adjusted RMSE-based Wald Confidence Intervals with Student’s T distribution<a class="anchor-link" href="#Conditionally-Bias-adjusted-RMSE-based-Wald-Confidence-Intervals-with-Student%E2%80%99s-T-distribution">¶</a></h2><h3 id="Pandas">Pandas<a class="anchor-link" href="#Pandas">¶</a></h3>
+<h1 id="Estimating-Confidence-Intervals-Using-Approximate-Monte-Carlo-Simulation-Iterations">Estimating Confidence Intervals Using Approximate Monte Carlo Simulation Iterations<a class="anchor-link" href="#Estimating-Confidence-Intervals-Using-Approximate-Monte-Carlo-Simulation-Iterations">¶</a></h1><h2 id="Conditionally-Bias-adjusted-RMSE-based-Wald-Confidence-Intervals-with-Student%E2%80%99s-T-distribution">Conditionally Bias-adjusted RMSE-based Wald Confidence Intervals with Student’s T distribution<a class="anchor-link" href="#Conditionally-Bias-adjusted-RMSE-based-Wald-Confidence-Intervals-with-Student%E2%80%99s-T-distribution">¶</a></h2>
 </div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=d6489fe9-38ca-4287-a9f6-631f163c9ae8">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=2d7e1ce9-6c4c-468b-9e53-dd51a1d0b6e9">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<p>This notebook provides an example on how the PPMF files from the 25 Approximate Monte Carlo (AMC) iterations can be used to generate confidence intervals for a few example queries and geographies.</p>
+<p>This notebook provides an example on how the PPMF files from the 25 Approximate Monte Carlo (AMC) iterations can be used to estimate confidence intervals for a few example queries and geographies. For details on the AMC method and the results of the research, see Ashmead et al., <a href="https://www2.census.gov/programs-surveys/decennial/2020/technical-documentation/complete-tech-docs/demographic-and-housing-characteristics-file-and-demographic-profile/data_analysis_resources/1_estimating_conf_intervals_2010_demo/1_Approx_Monte_Carlo_confidence_interval_paper.pdf"><em>An Approximate Monte Carlo Simulation Method for Estimating Uncertainty and Constructing Confidence Intervals for 2020 Census Statistics</em></a>.</p>
 <p>The method used is an RMSE-based confidence interval assuming a Student’s T distribution with 5 degrees of freedom. We use a conditional approach in
 which a bias-corrected interval was used only if some criteria was met and otherwise the non-bias-corrected versions were utilized.</p>
 <p>Bias was estimated as the "true" count from the PPMF0 for a given query and geography subtracted from the average count from the 25 AMC iterations for the same query and geography.</p>
@@ -7505,6 +7505,17 @@ The non-bias-corrected version did not have an adjusted interval.</p>
 <li>The absolute value of the estimated bias divided by the estimated standard deviation of the AMC estimates was greater than or equal to 0.5</li>
 <li>The estimated bias was either negative or the PPMF0 value was at least 25</li>
 </ul>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=65e77e66-a718-4159-87ad-a3c6d0fcb5a9">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h3 id="Pandas">Pandas<a class="anchor-link" href="#Pandas">¶</a></h3>
 </div>
 </div>
 </div>
@@ -7574,7 +7585,7 @@ for a few example queries and geographies. Though we used 2010 data, our queries
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Our data has one row for each query, geography, and iteration (0-25)</span>
 
-<span class="n">file_path</span> <span class="o">=</span> <span class="s2">"4_jupyter_data.csv"</span>
+<span class="n">file_path</span> <span class="o">=</span> <span class="s2">"3c_jupyter_data.csv"</span>
 <span class="n">df_example</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">file_path</span><span class="p">)</span>
 <span class="n">df_example</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
 </pre></div>
@@ -8385,7 +8396,9 @@ for a few example queries and geographies. Though we used 2010 data, our queries
 <div class="jp-InputPrompt jp-InputArea-prompt">In [6]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">os</span><span class="o">,</span> <span class="nn">sys</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="c1"># This was run and tested on EMR 6.15.0</span>
+
+<span class="kn">import</span> <span class="nn">os</span><span class="o">,</span> <span class="nn">sys</span>
 <span class="kn">import</span> <span class="nn">scipy.stats</span>
 <span class="kn">from</span> <span class="nn">IPython.core.display</span> <span class="kn">import</span> <span class="n">HTML</span>
 
@@ -8478,9 +8491,7 @@ for a few example queries and geographies. Though we used 2010 data, our queries
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
 <pre>Setting default log level to "WARN".
 To adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLevel(newLevel).
-24/04/08 13:30:06 WARN Utils: Service 'SparkUI (HTTPS)' could not bind on port 4440. Attempting port 4441.
-24/04/08 13:30:06 WARN Utils: Service 'SparkUI' could not bind on port 4040. Attempting port 4041.
-24/04/08 13:30:18 WARN Client: Neither spark.yarn.jars nor spark.yarn.archive is set, falling back to uploading libraries under SPARK_HOME.
+24/04/10 13:56:08 WARN Client: Neither spark.yarn.jars nor spark.yarn.archive is set, falling back to uploading libraries under SPARK_HOME.
 </pre>
 </div>
 </div>
