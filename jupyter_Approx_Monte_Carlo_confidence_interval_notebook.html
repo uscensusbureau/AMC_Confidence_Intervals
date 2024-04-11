@@ -3,7 +3,7 @@
 <html lang="en">
 <head><meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>3a_Approx_Monte_Carlo_confidence_interval_notebook</title><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
+<title>jupyter_Approx_Monte_Carlo_confidence_interval_notebook</title><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 <style type="text/css">
     pre { line-height: 125%; }
 td.linenos .normal { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
@@ -7493,7 +7493,7 @@ a.anchor-link {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<p>This notebook provides an example on how the PPMF files from the 25 Approximate Monte Carlo (AMC) iterations can be used to estimate confidence intervals for a few example queries and geographies. For details on the AMC method and the results of the research, see Ashmead et al., <a href="https://www2.census.gov/programs-surveys/decennial/2020/technical-documentation/complete-tech-docs/demographic-and-housing-characteristics-file-and-demographic-profile/data_analysis_resources/1_estimating_conf_intervals_2010_demo/1_Approx_Monte_Carlo_confidence_interval_paper.pdf"><em>An Approximate Monte Carlo Simulation Method for Estimating Uncertainty and Constructing Confidence Intervals for 2020 Census Statistics</em></a>.</p>
+<p>This notebook provides an example on how the PPMF files from the 25 Approximate Monte Carlo (AMC) iterations can be used to estimate confidence intervals for a few example queries and geographies. For details on the AMC method and the results of the research, see Ashmead et al., <a href="https://www2.census.gov/programs-surveys/decennial/2020/technical-documentation/complete-tech-docs/demographic-and-housing-characteristics-file-and-demographic-profile/data_analysis_resources/1_estimating_conf_intervals_2010_demo/Approx_Monte_Carlo_confidence_interval_paper.pdf"><em>An Approximate Monte Carlo Simulation Method for Estimating Uncertainty and Constructing Confidence Intervals for 2020 Census Statistics</em></a>.</p>
 <p>The method used is an RMSE-based confidence interval assuming a Student’s T distribution with 5 degrees of freedom. We use a conditional approach in
 which a bias-corrected interval was used only if some criteria was met and otherwise the non-bias-corrected versions were utilized.</p>
 <p>Bias was estimated as the "true" count from the PPMF0 for a given query and geography subtracted from the average count from the 25 AMC iterations for the same query and geography.</p>
@@ -7585,7 +7585,7 @@ for a few example queries and geographies. Though we used 2010 data, our queries
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Our data has one row for each query, geography, and iteration (0-25)</span>
 
-<span class="n">file_path</span> <span class="o">=</span> <span class="s2">"3c_jupyter_data.csv"</span>
+<span class="n">file_path</span> <span class="o">=</span> <span class="s2">"jupyter_data.csv"</span>
 <span class="n">df_example</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">file_path</span><span class="p">)</span>
 <span class="n">df_example</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
 </pre></div>
@@ -8491,7 +8491,7 @@ for a few example queries and geographies. Though we used 2010 data, our queries
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
 <pre>Setting default log level to "WARN".
 To adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLevel(newLevel).
-24/04/10 13:56:08 WARN Client: Neither spark.yarn.jars nor spark.yarn.archive is set, falling back to uploading libraries under SPARK_HOME.
+24/04/11 14:28:07 WARN Client: Neither spark.yarn.jars nor spark.yarn.archive is set, falling back to uploading libraries under SPARK_HOME.
 </pre>
 </div>
 </div>
@@ -8505,8 +8505,7 @@ To adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLeve
 <div class="jp-OutputArea-child">
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>                                                                                
-</pre>
+<pre>                                                                                </pre>
 </div>
 </div>
 <div class="jp-OutputArea-child jp-OutputArea-executeResult">
